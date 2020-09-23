@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Todos</title>
+</head>
+<body class="bg-light">
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header shadow-sm bg-white">
+                        <h1 class="display-5 text-info">
+                            Todo
+                        </h1>
+                    </div>
+                    <div class="card-body">
+
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <form action="{% url 'Insert' %}" method="POST" autocomplete="off">
+                                    {% csrf_token %}
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="content">
+                                        <div class="input-group-append text-info">
+                                            <span class='input-group-text bg-white py-0'>
+                                                <button type="submit" class="btn btn-success btn-sm">Add</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                            {% for todos in Todo %}
+                                <li class="list-group-item text-info">
+                                    {{todos.context}}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
